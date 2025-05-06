@@ -1,0 +1,19 @@
+<header class="header">
+  <div class="header-account" (click)="toggleDropdown()">
+    <img class="account-avatar" src="assets/images/noAvatarAccount.jpg" alt="Аватар">
+    <div class="account-name-role">
+      <p>Иванов</p>
+      <p>Администратор</p>
+    </div>
+    <div class="dropdown-arrow" [class.rotated]="isDropdownOpen">
+      <i class="bi bi-caret-down-fill" [class.rotated]="isDropdownOpen"></i>
+    </div>
+
+  </div>
+
+  <div class="dropdown-menu" *ngIf="isDropdownOpen">
+    <div class="dropdown-item">Профиль</div>
+    <div class="dropdown-item">Настройки</div>
+    <div class="dropdown-item">Выйти</div>
+  </div>
+</header>

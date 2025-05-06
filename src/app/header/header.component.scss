@@ -1,0 +1,84 @@
+.header {
+    background-color: #DA2032;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 70px;
+    position: fixed;
+    user-select: none;
+    width: 100%;
+}
+
+.header-account {
+    display: flex;
+    margin-right: 40px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.account-name-role {
+    font-size: 14px;
+    color: #E5E5E5;
+    margin-right: 10px;
+}
+
+.account-name-role p {
+    margin: 0;
+}
+  
+.account-avatar {
+    width: 34px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 7px;
+    object-fit: cover;
+}
+  
+.dropdown-arrow {
+    color: #E5E5E5;
+    font-size: 10px;
+    transition: transform 0.4s ease;
+    margin-left: 6px; 
+}
+
+.dropdown-arrow.rotated {
+transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    top: 100%;
+    right: 40px;
+    background-color: #DA2032;
+    border-radius: 10px;
+    padding: 0;
+    animation: fadeIn 0.3s ease-out forwards;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+    color: #E5E5E5;
+    cursor:  no-drop;
+    font-size: 14px;
+    height: 40px;
+    
+    &:hover {
+        background-color: #c02737;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid #eee;
+    }
+    &:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+    &:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+}
+
+
