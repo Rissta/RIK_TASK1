@@ -1,24 +1,31 @@
-<nav class="d-flex flex-column h-100 p-3" style="min-width: 200px;">
-    <div class="mb-4">
-      <strong>Суперагент</strong><br/>
-      <small>Банк ВТБ(ПАО)</small>
+<nav>
+  <div class="bank-dropdowan-container">
+    <div class="bank-dropdowan" (click)="toggleDropdown()">
+      <div class="bank">
+        <h4>Суперагент</h4>
+        <div class="dropdown-arrow" [class.rotated]="isDropdownOpen">
+          <img src="assets/icons/triangle-inverted.svg" />
+        </div>
+      </div>
+      <p>Банк ВТБ(ПАО)</p>
     </div>
-  
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link text-white" href="#">📄 Управление</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" href="#">📑 Карточка контрагента</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" href="#">📝 Договоры контрагента</a>
-      </li>
-      <li class="nav-item mt-3">
-        <a class="nav-link text-white" href="#">👥 Субагенты</a>
-      </li>
-    </ul>
-  
-    <div class="mt-auto text-muted small">v1.01</div>
-  </nav>
-  
+  </div>
+  <div class="management-container" *ngIf="isDropdownOpen">
+    <div class="management">
+      <img src="assets/icons/case-filled.svg">
+      <div class="management-links">
+        <h4>Управление</h4>
+        <a>Карточка контрагента</a>
+        <a>Договоры контрагента</a>
+      </div>
+    </div>
+  </div>
+  <div class="subagents" *ngIf="isDropdownOpen">
+    <img src="assets/icons/people.svg"/>
+    <h4>Субагенты</h4>
+  </div>
+
+  <footer class="version">
+    v1.01
+  </footer>
+</nav>

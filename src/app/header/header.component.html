@@ -6,14 +6,13 @@
       <p>Администратор</p>
     </div>
     <div class="dropdown-arrow" [class.rotated]="isDropdownOpen">
-      <i class="bi bi-caret-down-fill" [class.rotated]="isDropdownOpen"></i>
+      <img src="assets/icons/triangle-inverted.svg"/>
     </div>
-
   </div>
 
   <div class="dropdown-menu" *ngIf="isDropdownOpen">
-    <div class="dropdown-item">Профиль</div>
-    <div class="dropdown-item">Настройки</div>
-    <div class="dropdown-item">Выйти</div>
+    <a class="dropdown-item">Профиль</a>
+    <a class="dropdown-item">Настройки</a>
+    <a class="dropdown-item">Выйти</a>
   </div>
 </header>

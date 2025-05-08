@@ -1,0 +1,14 @@
+<div class="tag-input" [style.width]="width">
+    <input
+      class="tag-input-field"
+      type="text"
+      [value]="tagText"
+      (input)="onInput($event)"
+      placeholder="Введите имя..."
+    />
+    <button class="close-button" *ngIf="showCloseButton" (click)="onDelete()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.9999 0.333313C5.10657 0.333313 0.333252 5.10663 0.333252 11C0.333252 16.8933 5.10657 21.6666 10.9999 21.6666C16.8932 21.6666 21.6665 16.8933 21.6665 11C21.6665 5.10663 16.8932 0.333313 10.9999 0.333313ZM16.3332 14.8266L14.8265 16.3333L10.9999 12.5066L7.17324 16.3333L5.66657 14.8266L9.49323 11L5.66657 7.1733L7.17324 5.66663L10.9999 9.49329L14.8265 5.66663L16.3332 7.1733L12.5066 11L16.3332 14.8266Z" fill="#A2A9B1"/>
+      </svg>
+    </button>
+  </div>

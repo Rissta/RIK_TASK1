@@ -29,7 +29,6 @@
               "src/assets"
             ],
             "styles": [
-                "node_modules/bootstrap-icons/font/bootstrap-icons.css",
                 "node_modules/bootstrap/dist/css/bootstrap.min.css",
                 "src/styles.scss"
             ],
@@ -84,6 +83,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"

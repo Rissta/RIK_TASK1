@@ -1,1 +1,6 @@
-<p>user-management works!</p>
+<app-tag-input
+  [tagText]="'evagrekovich'"
+  [showCloseButton]="true"
+  (deleteTag)="handleDelete()"
+  (tagTextChanged)="onTagTextChanged($event)"
+></app-tag-input>

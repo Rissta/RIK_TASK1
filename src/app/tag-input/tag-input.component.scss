@@ -1,0 +1,36 @@
+.tag-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 22px;
+    background-color: #F5F5F5;
+    font-size: 14px;
+    font-family: 'Moscow Sans', sans-serif; /* Если используешь Москву Санс */
+    color: #333;
+    width: 266px; /* Указываем ширину */
+    height: 44px; /* Указываем высоту */
+  }
+  .tag-input-field {
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tag-text {
+    margin-right: 10px;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
