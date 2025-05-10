@@ -1,0 +1,31 @@
+<div>
+    <label for="custom-select" class="input-label">
+      {{ labelText }}
+    </label>
+    <div 
+      class="select-container" 
+      [style.width]="width" 
+      [style.height]="height"
+      (click)="toggleDropdown()"
+      (clickOutside)="showDropdown = false"
+    >
+      <div class="selected-value">
+        {{ selectedOption?.label || placeholderText }}
+      </div>
+      <div class="dropdown-arrow" [class.rotated]="showDropdown">
+        <svg width="7" height="4" viewBox="0 0 7 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H7L3.5 4L0 0Z" fill="#A2A9B1"/>
+        </svg>        
+      </div>
+      <div class="dropdown" *ngIf="showDropdown" (click)="$event.stopPropagation()">
+        <div 
+          class="dropdown-option" 
+          *ngFor="let option of options"
+          [class.selected]="option.value === selectedValue"
+          (click)="selectOption(option)"
+        >
+          {{ option.label }}
+        </div>
+      </div>
+    </div>
+  </div>

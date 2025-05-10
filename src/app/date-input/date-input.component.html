@@ -1,0 +1,44 @@
+<div>
+  <label for="date-input-field" class="input-label" [class.error-state]="error">
+    {{ labelText }}
+  </label>
+  <div 
+    class="tag-input" 
+    [style.width]="width" 
+    [style.height]="height"
+    [class.error-state]="error"
+  >
+    <input
+      id="date-input-field"
+      class="tag-input-field"
+      type="text"
+      [value]="dateText"
+      (input)="onInput($event)"
+      [placeholder]="placeholderText"
+      [class.error-state]="error"
+      (focus)="showCalendar = true"
+    />
+    <button class="calendar-button" (click)="toggleCalendar()">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        xmlns="http://www.w3.org/2000/svg"
+        class="calendar-icon"
+      >
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H0V4H4V0ZM10 0H6V4H10V0ZM12 0H16V4H12V0ZM4 6H0V10H4V6ZM6 6H10V10H6V6ZM4 12H0V16H4V12ZM6 12H10V16H6V12ZM16 6H12V10H16V6Z" fill="#A2A9B1"/>
+      </svg>
+    </button>
+    <div class="calendar-container" *ngIf="showCalendar">
+      <input 
+        type="date" 
+        [(ngModel)]="selectedDate"
+        (change)="onDateSelected()"
+        (clickOutside)="showCalendar = false"
+      />
+    </div>
+  </div>
+  <div class="error-message" *ngIf="error">
+    {{ errorMessage }}
+  </div>
+</div>

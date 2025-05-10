@@ -1,3 +1,4 @@
+
 .input-label {
   font-size: 16px;
   font-weight: bold;
@@ -8,6 +9,7 @@
 }
 
 .tag-input {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -18,9 +20,6 @@
   background-color: #F5F5F5;
   font-size: 16px;
   color: #333;
-  &.error-state {
-    border-color: #FF001F;
-  }
 }
 
 .tag-input-field {
@@ -34,17 +33,14 @@
   margin: 0;
 }
 
-.tag-text {
-  margin-right: 10px;
-}
-
-.close-button {
+.calendar-button {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   margin: 0;
 }
+
 .error-message {
   color: #FF001F;
   font-size: 14px;
@@ -52,20 +48,40 @@
   display: block;
   position: fixed;
   user-select: none;
-
 }
-.close-icon path {
+
+.calendar-icon path {
   fill: #A2A9B1;
 }
 
 .tag-input.error-state {
-  border: 1px solid #FF001F;
+  border-color: #FF001F;
 }
 
-.tag-input.error-state .close-icon path {
+.tag-input.error-state .calendar-icon path {
   fill: #FF001F;
 }
 
 .error-state {
   color: #FF001F;
 }
+
+.calendar-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+  input[type="date"] {
+
+    border: 1px solid #828C96;
+    border-radius: 8px;
+    padding: 8px;
+    outline: none;
+  }
+}
+

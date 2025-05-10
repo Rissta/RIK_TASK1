@@ -1,6 +1,41 @@
-<app-tag-input
-  [tagText]="'evagrekovich'"
-  [showCloseButton]="true"
-  (deleteTag)="handleDelete()"
-  (tagTextChanged)="onTagTextChanged($event)"
-></app-tag-input>
+
+<section class="main-area">
+  <button class="back-button">
+      <div class="back-button-icon">
+        <img src="assets/icons/back-button.svg" alt="">
+      </div>
+      Назад
+  </button>
+  <h3 class="title-settings">Настройка учетных записей сотрудников контрагента</h3>
+  <div class="contol-button-area">
+    <div class="red-contol-button">
+      <button class="contol-button">
+        Добавить
+        <div class="contol-button-icon">
+          <img src="assets/icons/plus.svg" alt="">
+        </div>
+      </button>
+      <button class="contol-button">
+        Разблокировать
+        <div class="contol-button-icon">
+          <img src="assets/icons/checkmark-circle.svg" alt="">
+        </div>
+      </button>
+      <button class="contol-button">
+        Заблокировать
+        <div class="contol-button-icon">
+          <img src="assets/icons/x-circle.svg" alt="">
+        </div>
+      </button>
+    </div>
+    <div class="gray-contol-button">
+      <button class="contol-button">
+        <div class="filter-button-icon">
+          <img src="assets/icons/filter.svg" alt="">
+        </div>
+        Фильтр
+      </button>
+    </div>
+  </div>
+  <app-filter></app-filter>
+</section>

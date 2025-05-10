@@ -1,0 +1,73 @@
+<h4 class="name-filter">Фильтр</h4>
+<div class="input-area">
+    <div class="grid-columns">
+        <app-tag-input
+            [tagText]="login"
+            (deleteTag)="handleDelete()"
+            labelText="Логин"
+            errorMessage="Недопустимые символы"
+        ></app-tag-input>
+        <app-tag-input
+            [tagText]="mail"
+            (deleteTag)="handleDelete()"
+            (tagTextChanged)="onMailChanged($event)"
+            labelText="E-mail"
+            [error]="errorMail"
+            errorMessage="Недопустимые символы"
+        ></app-tag-input>
+    </div>
+    <div class="grid-columns">
+        <app-tag-input
+            [tagText]="formattedPhone"
+            (deleteTag)="phoneDelete()"
+            (tagTextChanged)="onPhoneChanged($event)"
+            labelText="Телефон"
+            [error]="errorPhone"
+            errorMessage="Неверный номер"
+        ></app-tag-input>
+        <app-custom-select
+            [options]="[
+            {value: '1', label: 'Пользователь'},
+            {value: '2', label: 'Администратор'}
+            ]"
+            (valueChanged)="onRoleChanged($event)"
+            [selectedValue] = "role"
+            labelText="Роль"
+            placeholderText="Состояние"
+        ></app-custom-select>
+    </div>
+    <div class="grid-columns">
+        <app-date-input
+            [dateText]="dateOfCreation"
+            labelText="Дата создания"
+            [error]= "ErrorDateOfCreation"
+            (dateTextChanged)="onDateOfCreationnChanged($event)"
+        ></app-date-input>
+        <app-date-input
+            [dateText]="dateOfChange"
+            labelText="Дата изменения"
+            [error]= "ErrorDateOfChange"
+            (dateTextChanged)="onDateOfChangeChanged($event)"
+        ></app-date-input>
+    </div>
+    <app-custom-select
+        [options]="[
+        {value: '1', label: 'Активен'},
+        {value: '2', label: 'Заблокирован'}
+        ]"
+        (valueChanged)="onStatusChanged($event)"
+        [selectedValue] = "status"
+        labelText="Статус"
+    ></app-custom-select>
+  </div>
+  <div class="button-area">
+    <button class="red-button" (click)="checkErrors()">
+        Применить
+    </button>
+    <button class="gray-button">
+        Отмена
+    </button>
+    <button class="gray-button">
+        Сбросить
+    </button>
+  </div>
