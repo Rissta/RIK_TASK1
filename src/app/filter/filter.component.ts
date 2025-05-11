@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TagInputComponent } from '../tag-input/tag-input.component';
 import { DateInputComponent } from "../date-input/date-input.component";
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
+import { User } from '../services/mock-api.service';
 @Component({
   selector: 'app-filter',
   imports: [TagInputComponent, DateInputComponent, CustomSelectComponent],
@@ -9,7 +10,9 @@ import { CustomSelectComponent } from '../custom-select/custom-select.component'
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
+  @Output() filteredUsers = new EventEmitter<User[]>();
   public login: string = '';
+  @Input() users: User[] = [];
   public mail: string = '';
   public errorMail: boolean = false;
   public phoneNumber: string = '7';
@@ -59,6 +62,10 @@ export class FilterComponent {
     return phonePattern.test(phone);
   }
 
+  onLoginChanged(newText: string): void {
+    this.login = newText;
+  }
+
   // Меил
   onMailChanged(newText: string): void {
     this.mail = newText;
@@ -93,11 +100,71 @@ export class FilterComponent {
   }
 
   public checkErrors() : void{
-      console.log(this.formattedPhone)
-      this.errorPhone = (this.formattedPhone !== '+7' && this.formattedPhone !== '') ? (!this.isValidPhoneFormat(this.formattedPhone) || this.formattedPhone.length!=18) : false
-      this.errorMail = !this.isValidEmail(this.mail) && this.mail!='';
-      console.log( this.dateOfChange)
+      this.errorPhone = (this.formattedPhone !== '+7' && this.formattedPhone !=='') ? (!this.isValidPhoneFormat(this.formattedPhone) || this.formattedPhone.length!=18) : false
+      this.errorMail = !this.isValidEmail(this.mail) && this.mail !=='';
       this.ErrorDateOfCreation = this.dateOfCreation !== '' ? !this.isValidDateeFormat(this.dateOfCreation) : false;
       this.ErrorDateOfChange = this.dateOfChange !== '' ? !this.isValidDateeFormat(this.dateOfChange) : false;
+  }
+
+  
+
+  setUsers(users: User[]): void {
+    this.users = users;
+    this.applyFilters();
+  }
+  applyFilters(): void {
+    this.checkErrors();
+    let filtered = [...this.users];
+    if (this.login) {
+      filtered = filtered.filter(user => 
+        user.login.toLowerCase().includes(this.login.toLowerCase())
+      );
+    }
+    if (this.mail && !this.errorMail) {
+      filtered = filtered.filter(user => 
+        user.email.toLowerCase().includes(this.mail.toLowerCase())
+      );
+    }
+    if (this.formattedPhone !== '+7' && !this.errorPhone) {
+      const cleanPhone = this.formattedPhone.replace(/\D/g, '');
+      filtered = filtered.filter(user => 
+        user.phone.replace(/\D/g, '').includes(cleanPhone)
+      );
+    }
+    if (this.dateOfChange && !this.ErrorDateOfChange) {
+      filtered = filtered.filter(user => 
+        user.updatedAt === this.dateOfChange
+      );
+    }
+    if (this.dateOfCreation && !this.ErrorDateOfCreation) {
+      filtered = filtered.filter(user => 
+        user.createdAt === this.dateOfCreation
+      );
+    }
+    if (this.status !== undefined) {
+      const activeStatus = this.status;
+      filtered = filtered.filter(user => 
+        user.isActive === activeStatus
+      );
+    }
+    if (this.role !== undefined) {
+      filtered = filtered.filter(user => 
+        user.role === this.role
+      );
+    }
+    this.filteredUsers.emit(filtered);
+  }
+  cancelFilters() : void {
+    this.filteredUsers.emit(this.users);
+  }
+  clearFilters() : void {
+    this.login = '';
+    this.mail = '';
+    this.formattedPhone = '+7';
+    this.phoneNumber = '';
+    this.dateOfChange = '';
+    this.dateOfCreation = '';
+    this.status = undefined;
+    this.role = undefined;
   }
 }

@@ -1,0 +1,33 @@
+.custom-checkbox {
+  display: inline-flex;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle; 
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  background-color: #FFFFFF;
+  border: 1px solid #A2A9B1;
+  border-radius: 4px;
+  margin: 0;
+  transition: background-color 0.2s ease;
+}
+
+.checkmark.checked {
+  background-color: #FFFFFF;
+}
+
+.custom-checkbox:hover input:not(:disabled) ~ .checkmark {
+  background-color: #f5f8ff;
+  border-color: #092360;
+}

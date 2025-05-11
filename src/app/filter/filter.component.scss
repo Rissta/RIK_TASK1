@@ -1,3 +1,15 @@
+.filter-container {
+    display: flex;
+    align-items: center;
+    height: 372px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding-left: 40px;
+    padding-right: 64px;
+    width: 100%;
+    margin-top: 32px;
+}
 .name-filter {
     font-size: 20;
     font-weight: bold;
@@ -9,7 +21,6 @@
     gap: 24px;
     margin-top: 32px;
     margin-left: 24px;
-    width: 0px;
 }
 .grid-columns *{
     display: block;

@@ -1,0 +1,135 @@
+<div class="table-container">
+  <div class="controls">
+    <div class="controls-size">
+      <div class="display-controls">
+        <span>Отображать</span>
+        <app-custom-select-table
+          class="page-size-select"
+          [options]="getPageSizeOptions()"
+          (valueChanged)="onPageSizeChange($event)"
+          [selectedValue]="pageSize"
+        ></app-custom-select-table>
+        <span>записей</span>
+        <div class="range-info">
+          {{displayRange}}
+        </div>  
+      </div>
+      <div class="selection-info">
+        <p>Количество выбранных записей: {{selectedCount}}</p>
+      </div>
+    </div>
+    <div class="pagination-controls">
+      <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
+      
+      <!-- <span class="page-info">{{currentPage}} из {{totalPages}}</span> -->
+      
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
+      <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
+    </div>
+  </div>
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Действия</th>
+        <th>
+          <div class="checkbox-container">
+            <app-custom-checkbox 
+              (checkedChange)="toggleSelectAll($event)"
+              class="checkbox"
+            ></app-custom-checkbox>
+            Логин
+          </div>
+        </th>
+        <th>E-mail</th>
+        <th>Телефон</th>
+        <th>Роли</th>
+        <th>Дата изменения</th>
+        <th>Дата создания</th>
+        <th>Статус</th>
+        <th>Наличие ЭП</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of displayedRecords">
+        <td style="font-size: 24px; font-weight: bold;">...</td>
+        <td>
+          <div class="checkbox-container">
+            <app-custom-checkbox 
+              [checked]="record.selected || false" 
+              (checkedChange)="toggleSelectRecord(record)"
+              class="checkbox"
+            ></app-custom-checkbox>
+            {{record.login}}
+          </div>
+        </td>
+        <td>{{record.email}}</td>
+        <td>{{record.phone}}</td>
+        <td>{{record.role}}</td>
+        <td>{{record.updatedAt}}</td>
+        <td>{{record.createdAt}}</td>
+        <td>
+          <p *ngIf="record.isActive" style="color: #25B553; margin: 0px;">Активен</p>
+          <p *ngIf="!record.isActive" style="color: #FF001F;  margin: 0px;">Заблокирован</p>
+        </td>
+        <td>
+          <img *ngIf="record.hasDigitalSignature" src="assets/icons/green-check-mark.svg"/>
+          <img *ngIf="!record.hasDigitalSignature" src="assets/icons/red-x.svg"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="table-container">
+    <div class="controls">
+      <div class="controls-size">
+        <div class="display-controls">
+          <span>Отображать</span>
+          <app-custom-select-table
+            class="page-size-select"
+            [options]="getPageSizeOptions()"
+            (valueChanged)="onPageSizeChange($event)"
+            [selectedValue]="pageSize"
+          ></app-custom-select-table>
+          <span>записей</span>
+          <div class="range-info">
+            {{displayRange}}
+          </div>  
+        </div>
+        <div class="selection-info">
+          <p>Количество выбранных записей: {{selectedCount}}</p>
+        </div>
+      </div>
+      <div class="pagination-controls">
+        <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
+        
+        <!-- <span class="page-info">{{currentPage}} из {{totalPages}}</span> -->
+        
+        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
+        <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
+      </div>
+    </div>
+
+  <!-- <div class="table-container">
+    <div class="controls-size">
+      <div class="display-controls">
+        <span>Отображать</span>
+        <app-custom-select-table
+          class="page-size-select"
+          [options]="getPageSizeOptions()"
+          (valueChanged)="onPageSizeChange($event)"
+          [selectedValue]="pageSize"
+        ></app-custom-select-table>
+        <span>записей</span>
+        <div class="range-info">
+          {{displayRange}}
+        </div>  
+      </div>
+      <div class="selection-info" *ngIf="selectedCount > 0">
+        <p>Количество выбранных записей: {{selectedCount}}</p>
+      </div>
+    </div> -->
+    
+    

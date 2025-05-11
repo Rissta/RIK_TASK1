@@ -15,13 +15,13 @@
           <img src="assets/icons/plus.svg" alt="">
         </div>
       </button>
-      <button class="contol-button">
+      <button class="contol-button" (click)="unblockUsers()">
         Разблокировать
         <div class="contol-button-icon">
           <img src="assets/icons/checkmark-circle.svg" alt="">
         </div>
       </button>
-      <button class="contol-button">
+      <button class="contol-button" (click)="blockUsers()">
         Заблокировать
         <div class="contol-button-icon">
           <img src="assets/icons/x-circle.svg" alt="">
@@ -29,7 +29,7 @@
       </button>
     </div>
     <div class="gray-contol-button">
-      <button class="contol-button">
+      <button class="contol-button" (click)="showFiltr=!showFiltr">
         <div class="filter-button-icon">
           <img src="assets/icons/filter.svg" alt="">
         </div>
@@ -37,5 +37,14 @@
       </button>
     </div>
   </div>
-  <app-filter></app-filter>
+  <app-filter
+    *ngIf="showFiltr"
+    [users]="users"
+    (filteredUsers)="onFilteredUsers($event)"
+  ></app-filter>
+  <app-line-table
+    [records]="displayedUsers"
+    [totalRecords]="displayedUsers.length"
+    (selectionChange)="onSelectedUsers($event)" 
+  ></app-line-table>
 </section>
