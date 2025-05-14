@@ -1,11 +1,12 @@
 <div>
-    <label for="custom-select" class="input-label">
+    <label for="custom-select" class="input-label" *ngIf="labelText">
       {{ labelText }}
     </label>
     <div 
       class="select-container" 
       [style.width]="width" 
       [style.height]="height"
+      [style.font-size]="fontSize"
       (click)="toggleDropdown()"
       (clickOutside)="showDropdown = false"
     >

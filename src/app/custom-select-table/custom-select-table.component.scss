@@ -69,24 +69,7 @@
     margin-top: 5px;
     scrollbar-width: thin;
     scrollbar-color: #CBCDD2 transparent;
-
-    &::-webkit-scrollbar {
-        width: 2px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-        margin: 2px 0;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #CBCDD2;
-        border-radius: 2px;
-    }
-
-    &::-webkit-scrollbar-button {
-        display: none;
-    }
+    z-index: 2;
   }
   
   .dropdown-option {

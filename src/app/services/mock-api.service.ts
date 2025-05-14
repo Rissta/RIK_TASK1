@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
 
 export interface User {
   id: number;
@@ -243,24 +242,22 @@ export class MockApiService {
 
   constructor() {}
 
-  getUsers(): Observable<User[]> {
-    return of(this.mockUsers).pipe(delay(500));
+  getUsers(): User[] {
+    return this.mockUsers;
   }
 
-  toggleUserStatus(userId: number, userState : boolean): Observable<void> {
+  toggleUserStatus(userId: number, userState: boolean): void {
     const user = this.mockUsers.find(u => u.id === userId);
     if (user) {
       user.isActive = userState;
       user.updatedAt = this.formatDate(new Date());
     }
-    return of(undefined).pipe(delay(200));
   }
-  
+
   private formatDate(date: Date): string {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    
     return `${day}.${month}.${year}`;
   }
 }

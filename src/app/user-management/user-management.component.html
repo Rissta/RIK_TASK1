@@ -40,11 +40,20 @@
   <app-filter
     *ngIf="showFiltr"
     [users]="users"
+    [inputWidth]="inputWidth"
+    [inputHigth]="inputHigth"
     (filteredUsers)="onFilteredUsers($event)"
   ></app-filter>
   <app-line-table
+    *ngIf="!changeTable"
     [records]="displayedUsers"
     [totalRecords]="displayedUsers.length"
     (selectionChange)="onSelectedUsers($event)" 
   ></app-line-table>
+  <app-card-table
+    *ngIf="changeTable"
+    [records]="displayedUsers"
+    [totalRecords]="displayedUsers.length"
+    (selectionChange)="onSelectedUsers($event)" 
+  ></app-card-table>
 </section>

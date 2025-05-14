@@ -7,15 +7,22 @@ nav {
     color: #FFFFFF;
     margin-top: 70px;
     user-select: none;
+
+    @media(max-width: 1600px){
+        width: 263px;
+    }
 }
 
 .bank-dropdowan-container {
     display: flex;
     align-items: center;
-    justify-content: end;
+    padding-left: 80px;
     height: 97px;
     border-bottom: 1px solid #C4C4C4;
     border-top: 1px solid #C4C4C4;
+    @media(max-width: 1600px){
+        padding-left: 64px;
+    }
 }
 
 .bank-dropdowan-container p {
@@ -62,9 +69,13 @@ nav {
 .management-container {
     margin: 4px 0px;
     height: 149px;
+    padding-left: 40px;
     animation: fadeIn 0.3s ease-out forwards;
     &:hover{
         background-color: #A2A9B1;
+    }
+    @media(max-width: 1600px){
+        padding-left: 24px;
     }
 }
 
@@ -72,7 +83,6 @@ nav {
     display: flex;
     align-items: baseline;
     margin-top: 16px;
-    margin-left: 40px;
 }
 
 .management-links {
@@ -98,14 +108,14 @@ nav {
     display: flex;
     align-items: center;
     height: 56px;
+    padding-left: 40px;
     animation: fadeIn 0.3s ease-out forwards;
     &:hover{
         background-color: #A2A9B1;
     }
-}
-
-.subagents img {
-    margin-left: 40px;
+    @media(max-width: 1600px){
+        padding-left: 24px;
+    }
 }
 
 .subagents h4{

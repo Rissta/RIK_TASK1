@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="header-account" (click)="toggleDropdown()">
+  <div class="header-account" (click)="toggleDropdown()" *ngIf="!isTabletSize">
     <img class="account-avatar" src="assets/images/noAvatarAccount.jpg" alt="Аватар">
     <div class="account-name-role">
       <p>Иванов</p>
@@ -8,6 +8,9 @@
     <div class="dropdown-arrow" [class.rotated]="isDropdownOpen">
       <img src="assets/icons/triangle-inverted.svg"/>
     </div>
+  </div>
+  <div class="header-account" (click)="toggleDropdown()" *ngIf="isTabletSize">
+    <img src="assets/icons/header-settings.svg"/>
   </div>
 
   <div class="dropdown-menu" *ngIf="isDropdownOpen">

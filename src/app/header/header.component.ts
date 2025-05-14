@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WindowSizeService } from '../services/window-size.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,25 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+  isTabletSize : boolean = false;
   isDropdownOpen = false;
+  constructor(private WindowSizeService: WindowSizeService) {}
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+
+  ngOnInit() : void {
+    this.ResizeScreen();
+  }
+
+  ResizeScreen(): void {
+    this.WindowSizeService.onResize().subscribe(width => 
+      {
+      this.isTabletSize = width <= 1440;
+    });
+  }
+
 }
 

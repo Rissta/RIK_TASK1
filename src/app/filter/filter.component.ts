@@ -3,6 +3,7 @@ import { TagInputComponent } from '../tag-input/tag-input.component';
 import { DateInputComponent } from "../date-input/date-input.component";
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
 import { User } from '../services/mock-api.service';
+
 @Component({
   selector: 'app-filter',
   imports: [TagInputComponent, DateInputComponent, CustomSelectComponent],
@@ -24,6 +25,8 @@ export class FilterComponent {
   public ErrorDateOfCreation: boolean = false;
   public status: any = undefined; 
   public role: any = undefined; 
+  @Input() inputWidth: string = "266px";
+  @Input() inputHigth: string = "44px";
 
   // Телефон
   handleDelete(): void {

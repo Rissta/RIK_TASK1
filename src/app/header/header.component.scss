@@ -1,6 +1,5 @@
 .header {
     background-color: #DA2032;
-    // background: linear-gradient(-3deg, #D1430F, #D10F33);
     display: flex;
     justify-content: end;
     align-items: center;
@@ -10,6 +9,9 @@
     width: 100%;
     font-weight: bold;
     z-index: 9999;
+    @media(max-width:1440px){
+        background: linear-gradient(-3deg, #D1430F, #D10F33);
+    }
 }
 
 .header-account {
@@ -17,6 +19,15 @@
     margin-right: 40px;
     align-items: center;
     cursor: pointer;
+    @media(max-width:1600px){
+        margin-right: 64px;
+    }
+    @media(max-width:1440px){
+        margin-right: 52px;
+    }
+    @media(max-width:1024px){
+        margin-right: 48px;
+    }
 }
 
 .account-name-role {
@@ -59,6 +70,9 @@
     padding: 0;
     animation: fadeIn 0.3s ease-out forwards;
     display: block;
+    @media(max-width:1440px){
+        background: linear-gradient(-3deg, #D1430F, #D10F33);
+    }
 }
 
 @keyframes fadeIn {

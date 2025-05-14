@@ -20,6 +20,7 @@ export class CustomSelectComponent {
   @Input() height: string = '44px';
   @Input() labelText: string = '';
   @Input() placeholderText: string = '';
+  @Input() fontSize: string = '16px'
   @Output() valueChanged = new EventEmitter<any>();
 
   showDropdown = false;

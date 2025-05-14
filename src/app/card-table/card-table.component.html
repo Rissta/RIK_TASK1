@@ -1,1 +1,136 @@
-<p>card-table works!</p>
+<div class="table-container">
+    <div class="controls">
+      <div class="controls-size">
+        <div class="display-controls">
+          <span>Отображать</span>
+          <app-custom-select-table
+            class="page-size-select"
+            [options]="getPageSizeOptions()"
+            (valueChanged)="onPageSizeChange($event)"
+            [selectedValue]="pageSize"
+          ></app-custom-select-table>
+          <span>записей</span>
+          <div class="range-info">
+            {{displayRange}}
+          </div>  
+        </div>
+        <div class="selection-info">
+          Количество выбранных записей: {{selectedCount}}
+        </div>
+      </div>
+      <div class="Даделать">
+        Сортировать по
+        <app-custom-select
+          [options]="[
+          {value: 'login', label: 'Логину'},
+          {value: 'email', label: 'Почте'},
+          {value: 'phone', label: 'Телефону'},
+          {value: 'updatedAt', label: 'Дате создания'},
+          {value: 'createdAt', label: 'Дате изменния'},
+          ]"
+          [selectedValue] = "sortValue"
+          (valueChanged)="onSortChanged($event)"
+          [width]="'145px'"
+          [height]="'36px'"
+        ></app-custom-select>   
+      </div>
+      <div class="pagination-controls">
+        <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
+        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
+        <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
+      </div>
+    </div>
+  
+    <div class="card-container">
+      <div *ngFor="let record of displayedRecords" class="record-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="field">Действия</div>
+                <div class="value">
+                    <img src="assets/icons/three-dots.svg"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="checkbox-container">
+                    <app-custom-checkbox 
+                        [checked]="allSelect || false" 
+                        (checkedChange)="toggleSelectAll($event)"
+                        class="checkbox"
+                    ></app-custom-checkbox>
+                    Логин
+                </div>
+                <div class="value-right">
+                    <app-custom-checkbox 
+                        [checked]="record.selected || false" 
+                        (checkedChange)="toggleSelectRecord(record)"
+                        class="checkbox"
+                    ></app-custom-checkbox>
+                    <span class="login">{{record.login}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field">E-mail</div>
+                <div class="value">{{record.email}}</div>
+            </div>
+            <div class="row">
+                <div class="field">Телефон</div>
+                <div class="value-right">{{record.phone}}</div>
+            </div>
+            <div class="row">
+                <div class="field">Роли</div>
+                <div class="value">{{record.role}}</div>
+            </div>
+            <div class="row">
+                <div class="field">Дата изменения</div>
+                <div class="value-right">{{record.updatedAt}}</div>
+            </div>
+            <div class="row">
+                <div class="field">Дата создания</div>
+                <div class="value">{{record.createdAt}}</div>
+            </div>
+            <div class="row">
+                <div class="field">Статус</div>
+                <div class="value-right">
+                    <p *ngIf="record.isActive" style="color: #25B553; margin: 0px;">Активен</p>
+                    <p *ngIf="!record.isActive" style="color: #FF001F; margin: 0px;">Заблокирован</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field">Наличие ЭП</div>
+                <div class="value">
+                    <img *ngIf="record.hasDigitalSignature" src="assets/icons/green-check-mark.svg"/>
+                    <img *ngIf="!record.hasDigitalSignature" src="assets/icons/red-x.svg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+    <div class="controls">
+      <div class="controls-size">
+        <div class="display-controls">
+          <span>Отображать</span>
+          <app-custom-select-table
+            class="page-size-select"
+            [options]="getPageSizeOptions()"
+            (valueChanged)="onPageSizeChange($event)"
+            [selectedValue]="pageSize"
+          ></app-custom-select-table>
+          <span>записей</span>
+          <div class="range-info">
+            {{displayRange}}
+          </div>  
+        </div>
+        <div class="selection-info">
+          <p>Количество выбранных записей: {{selectedCount}}</p>
+        </div>
+      </div>
+      <div class="pagination-controls">
+        <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
+        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
+        <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
+      </div>
+    </div>
+  </div>

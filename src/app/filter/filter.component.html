@@ -3,12 +3,13 @@
     <div>
         <h4 class="name-filter">Фильтр</h4>
         <div class="input-area">
-            <div class="grid-columns">
                 <app-tag-input
                     [tagText]="login"
                     (tagTextChanged)="onLoginChanged($event)"
                     labelText="Логин"
                     errorMessage="Недопустимые символы"
+                    [width]="inputWidth"
+                    [height]="inputHigth"
                 ></app-tag-input>
                 <app-tag-input
                     [tagText]="mail"
@@ -16,15 +17,17 @@
                     labelText="E-mail"
                     [error]="errorMail"
                     errorMessage="Недопустимые символы"
+                    [width]="inputWidth"
+                    [height]="inputHigth"
                 ></app-tag-input>
-            </div>
-            <div class="grid-columns">
                 <app-tag-input
                     [tagText]="formattedPhone"
                     (tagTextChanged)="onPhoneChanged($event)"
                     labelText="Телефон"
                     [error]="errorPhone"
                     errorMessage="Неверный номер"
+                    [width]="inputWidth"
+                    [height]="inputHigth"
                 ></app-tag-input>
                 <app-custom-select
                     [options]="[
@@ -34,15 +37,17 @@
                     (valueChanged)="onRoleChanged($event)"
                     [selectedValue] = "role"
                     labelText="Роль"
+                    [width]="inputWidth"
+                    [height]="inputHigth"
                 ></app-custom-select>
-            </div>
-            <div class="grid-columns">
                 <app-date-input
                     [dateText]="dateOfCreation"
                     labelText="Дата создания"
                     [error]= "ErrorDateOfCreation"
                     errorMessage="Недопустимые символы"
                     (dateTextChanged)="onDateOfCreationnChanged($event)"
+                    [width]="inputWidth"
+                    [height]="inputHigth"
                 ></app-date-input>
                 <app-date-input
                     [dateText]="dateOfChange"
@@ -50,8 +55,9 @@
                     [error]= "ErrorDateOfChange"
                     errorMessage="Недопустимые символы"
                     (dateTextChanged)="onDateOfChangeChanged($event)"
+                    [width]="inputWidth"
+                    [height]="inputHigth"
                 ></app-date-input>
-            </div>
             <app-custom-select
                 [options]="[
                 {value: true, label: 'Активен'},
@@ -60,6 +66,8 @@
                 (valueChanged)="onStatusChanged($event)"
                 [selectedValue] = "status"
                 labelText="Статус"
+                [width]="inputWidth"
+                [height]="inputHigth"
             ></app-custom-select>
         </div>
         <div class="button-area">

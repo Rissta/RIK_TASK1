@@ -1,0 +1,122 @@
+.table-container {
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 32px;
+}
+
+.controls {
+    display: block;
+    padding: 8px 16px;
+}
+
+.controls-size {
+    display: flex;
+    // @media(max-width:1440px){
+    //     display: block;
+    // }
+}
+
+.display-controls {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 50px;
+    // margin-left: 56px;
+}
+
+.range-info {
+    margin-left: 17px;
+    font-size: 14px;
+    color: #666F78;
+}
+
+.selection-info{
+    // padding-left: 58px;
+    padding-left: 40px;
+    font-size: 14px;
+    margin: 0px;
+    color: #666F78;
+}
+
+.page-size-select {
+    margin: 0px 8px;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    gap: 10px;
+    button {
+        border: 0;
+        cursor: pointer;
+        border-radius: 4px;
+        
+        &:hover:not([disabled]) {
+        background-color: #e8e8e8;
+        }
+        
+        &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        }
+    }
+
+    .page-info {
+        margin: 0 15px;
+    }
+}
+
+.checkbox-container{
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+}
+
+.checkbox {
+    margin-right: 8px;
+}
+
+.card-container {
+    margin-left: 12px;
+    width: 100%;
+}
+.card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 8px;
+}
+
+.row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    height: 56px;
+    color: #282828; 
+    width: 100%;
+    font-size: 14px;
+    border-top: 1px solid #C4C4C4;
+}
+.row:last-child, .row:nth-last-child(2) {
+    border-bottom: 1px solid #C4C4C4;
+}
+.row:last-child{
+    border-top: 0px;
+}
+.row:nth-last-child(3) {
+    border-bottom: 1px solid #C4C4C4;
+    }
+.row:nth-child(odd) {
+    border-right: 1px solid #C4C4C4;
+}
+
+.field {
+    padding-left: 48px;
+}
+
+.value {
+    padding-left: 38px;
+}
+.value-right {
+    padding-left: 16px;
+}

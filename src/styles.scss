@@ -1,12 +1,12 @@
-// @font-face {
-//     font-family: 'Moscow Sans';
-//     src: url('/src/assets/fonts/moscowsansregular.ttf') format('truetype');
-//     font-weight: normal;
-//     font-style: normal;
-// }
+@font-face {
+    font-family: 'Moscow Sans';
+    src: url('/assets/fonts/moscowsansregular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html, body { height: 100%; }
 body { margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
-    // font-family: 'Moscow Sans', sans-serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif; 
+    font-family: 'Moscow Sans', sans-serif;
 }

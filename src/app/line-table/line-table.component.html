@@ -15,7 +15,7 @@
         </div>  
       </div>
       <div class="selection-info">
-        <p>Количество выбранных записей: {{selectedCount}}</p>
+        Количество выбранных записей: {{selectedCount}}
       </div>
     </div>
     <div class="pagination-controls">
@@ -53,7 +53,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let record of displayedRecords">
-        <td style="font-size: 24px; font-weight: bold;">...</td>
+        <td>
+          <img src="assets/icons/three-dots.svg"/>
+        </td>
         <td>
           <div class="checkbox-container">
             <app-custom-checkbox 
@@ -111,25 +113,4 @@
         <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
       </div>
     </div>
-
-  <!-- <div class="table-container">
-    <div class="controls-size">
-      <div class="display-controls">
-        <span>Отображать</span>
-        <app-custom-select-table
-          class="page-size-select"
-          [options]="getPageSizeOptions()"
-          (valueChanged)="onPageSizeChange($event)"
-          [selectedValue]="pageSize"
-        ></app-custom-select-table>
-        <span>записей</span>
-        <div class="range-info">
-          {{displayRange}}
-        </div>  
-      </div>
-      <div class="selection-info" *ngIf="selectedCount > 0">
-        <p>Количество выбранных записей: {{selectedCount}}</p>
-      </div>
-    </div> -->
-    
     
