@@ -2,14 +2,16 @@
     <div class="controls">
       <div class="controls-size">
         <div class="display-controls">
-          <span>Отображать</span>
-          <app-custom-select-table
-            class="page-size-select"
-            [options]="getPageSizeOptions()"
-            (valueChanged)="onPageSizeChange($event)"
-            [selectedValue]="pageSize"
-          ></app-custom-select-table>
-          <span>записей</span>
+          <div style="display: flex;" class="first-line">
+            <span>Отображать</span>
+            <app-custom-select-table
+              class="page-size-select"
+              [options]="getPageSizeOptions()"
+              (valueChanged)="onPageSizeChange($event)"
+              [selectedValue]="pageSize"
+            ></app-custom-select-table>
+            <span>записей</span>
+          </div>
           <div class="range-info">
             {{displayRange}}
           </div>  
@@ -18,7 +20,7 @@
           Количество выбранных записей: {{selectedCount}}
         </div>
       </div>
-      <div class="Даделать">
+      <div class="sort-container">
         Сортировать по
         <app-custom-select
           [options]="[
@@ -107,30 +109,39 @@
     </div>
 </div>
   
-    <div class="controls">
-      <div class="controls-size">
-        <div class="display-controls">
-          <span>Отображать</span>
-          <app-custom-select-table
-            class="page-size-select"
-            [options]="getPageSizeOptions()"
-            (valueChanged)="onPageSizeChange($event)"
-            [selectedValue]="pageSize"
-          ></app-custom-select-table>
-          <span>записей</span>
-          <div class="range-info">
-            {{displayRange}}
-          </div>  
-        </div>
-        <div class="selection-info">
-          <p>Количество выбранных записей: {{selectedCount}}</p>
-        </div>
+<div class="table-container">
+  <div class="controls">
+    <div class="controls-size">
+      <div class="display-controls">
+        <span>Отображать</span>
+        <app-custom-select-table
+          class="page-size-select"
+          [options]="getPageSizeOptions()"
+          (valueChanged)="onPageSizeChange($event)"
+          [selectedValue]="pageSize"
+        ></app-custom-select-table>
+        <span>записей</span>
+        <div class="range-info">
+          {{displayRange}}
+        </div>  
       </div>
-      <div class="pagination-controls">
-        <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
-        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
-        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
-        <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
+      <div class="selection-info">
+        Количество выбранных записей: {{selectedCount}}
       </div>
     </div>
-  </div>
+    <div class="sort-container">
+      Сортировать по
+      <app-custom-select
+        [options]="[
+        {value: 'login', label: 'Логину'},
+        {value: 'email', label: 'Почте'},
+        {value: 'phone', label: 'Телефону'},
+        {value: 'updatedAt', label: 'Дате создания'},
+        {value: 'createdAt', label: 'Дате изменния'},
+        ]"
+        [selectedValue] = "sortValue"
+        (valueChanged)="onSortChanged($event)"
+        [width]="'145px'"
+        [height]="'36px'"
+      ></app-custom-select>   
+    </div>

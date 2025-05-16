@@ -11,23 +11,49 @@
 
 .controls-size {
     display: flex;
-    // @media(max-width:1440px){
-    //     display: block;
-    // }
+    @media(max-width:1440px){
+        display: block;
+    }
+    @media(max-width:1024px){
+        display: flex;
+    }
+    @media(max-width:768px){
+        display: block;
+    }
 }
 
 .display-controls {
     display: flex;
     align-items: center;
     font-size: 14px;
+    @media(max-width:1440px){
+        display: flex;
+    }
+    @media(max-width:768px){
+            display: block;
+    }
+}
+.first-line{
     margin-left: 50px;
-    // margin-left: 56px;
+    @media(max-width:1440px){
+        display: flex;
+        margin-left: 73px;
+    }
+    @media(max-width:768px){
+        margin-left: 73px;
+            display: grid;
+    }
 }
 
 .range-info {
+    display: flex;
     margin-left: 17px;
     font-size: 14px;
     color: #666F78;
+    @media(max-width:768px){
+        margin: 0px;
+        display: block;
+    }
 }
 
 .selection-info{
@@ -36,6 +62,21 @@
     font-size: 14px;
     margin: 0px;
     color: #666F78;
+    @media(max-width:768px){
+        padding: 16px 0px;
+
+    }
+}
+
+.sort-container {
+    display: flex;
+    align-items: flex-end;
+    padding-top: 16px;
+    gap: 8px;
+    @media(max-width:768px){
+        padding: 0px;
+        align-items: center;
+    }
 }
 
 .page-size-select {
@@ -67,6 +108,7 @@
     }
 }
 
+
 .checkbox-container{
     display: flex;
     align-items: center;
@@ -85,6 +127,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 8px;
+    @media(max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .row {
@@ -116,6 +161,9 @@
 
 .value {
     padding-left: 38px;
+    @media(max-width: 768px) {
+        padding-left: 16px;
+    }
 }
 .value-right {
     padding-left: 16px;

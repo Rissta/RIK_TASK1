@@ -28,6 +28,8 @@ export class UserManagementComponent implements OnInit {
   public errorMessage: string | null = null;
   public inputWidth: string = "266px";
   public inputHigth: string = "44px";
+  public isMobile : boolean = false;
+
   constructor(private mockApiService: MockApiService, private WindowSizeService: WindowSizeService, private ApiService: ApiService) {}
 
   ngOnInit(): void {
@@ -58,12 +60,8 @@ export class UserManagementComponent implements OnInit {
         this.inputWidth = "288px";
         this.inputHigth = "36px";
       }
-      if(width < 1024){
-        this.changeTable = true;
-      } 
-      else {
-        this.changeTable = false;
-      }
+      this.changeTable = width < 1024;
+      this.isMobile = width < 786
     });
   }
 
@@ -109,8 +107,9 @@ export class UserManagementComponent implements OnInit {
   }
   async loadUsers1() {
     try {
-      this.users1 = await this.ApiService.getUsers().toPromise();
-      console.log(this.users1)
+      const users = await this.ApiService.getUsers().toPromise();
+      this.users1 = users || [];
+      console.log(this.users1);
     } catch (error) {
       console.error('Ошибка при получении данных:', error);
     }

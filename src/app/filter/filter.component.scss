@@ -9,13 +9,20 @@
     @media(max-width:1600px){
         padding: 24px 32px;
     }
-    @media(max-width:1600px){
+    @media(max-width:1440px){
         padding: 16px 24px;
+    }
+    @media(max-width:768px){
+        padding: 0px;
+        justify-content: center;
     }
 }
 .name-filter {
     font-size: 20px;
     font-weight: bold;
+    @media(max-width:768px){
+        padding: 8px 16px;
+    }
 }
 .input-area {
     display: grid;
@@ -29,6 +36,10 @@
     @media(max-width:1024px){
         grid-template-columns: repeat(2, 1fr);
     }
+    @media(max-width:768px){
+        grid-template-columns: 1fr;
+        margin-left: 0px;
+    }
     
 }
 // .grid-columns *{
@@ -39,8 +50,18 @@
 // }
 .button-area {
     display: flex;
-    margin-top: 32px;
+    margin-top: 24px;
     margin-left: 24px;
+    @media(max-width: 1024px) {
+        margin-left: 16px;
+    }
+    @media(max-width: 768px){
+        margin-left: 0px;
+        display: grid;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 8px;
+    }
 }
 .red-button, .gray-button {
     display: flex;
@@ -52,6 +73,15 @@
     height: 48px;
     font-size: 16px;
     font-weight: bold;
+    @media(max-width: 1024px) {
+        width: 154px;
+        height: 48px;
+    }
+    @media(max-width: 768px){
+        
+        width: 136px;
+        height: 48px;
+    }
 }
 .red-button {
     width: 169px;

@@ -11,26 +11,26 @@
     <div class="red-contol-button">
       <button class="contol-button">
         Добавить
-        <div class="contol-button-icon">
+        <div class="contol-button-icon" *ngIf="!isMobile">
           <img src="assets/icons/plus.svg" alt="">
         </div>
       </button>
       <button class="contol-button" (click)="unblockUsers()">
         Разблокировать
-        <div class="contol-button-icon">
+        <div class="contol-button-icon" *ngIf="!isMobile">
           <img src="assets/icons/checkmark-circle.svg" alt="">
         </div>
       </button>
       <button class="contol-button" (click)="blockUsers()">
         Заблокировать
-        <div class="contol-button-icon">
+        <div class="contol-button-icon" *ngIf="!isMobile">
           <img src="assets/icons/x-circle.svg" alt="">
         </div>
       </button>
     </div>
     <div class="gray-contol-button">
       <button class="contol-button" (click)="showFiltr=!showFiltr">
-        <div class="filter-button-icon">
+        <div class="filter-button-icon" *ngIf="!isMobile">
           <img src="assets/icons/filter.svg" alt="">
         </div>
         Фильтр
