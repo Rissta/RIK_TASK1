@@ -1,14 +1,10 @@
 import { WindowSizeService } from './../services/window-size.service';
-import { ApiService } from './../services/api.service';
+import { ApiService, UserData, Page } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FilterComponent } from '../filter/filter.component';
-import { HttpClientModule } from '@angular/common/http';
-import { MockApiService, User } from '../services/mock-api.service';
 import { LineTableComponent } from '../line-table/line-table.component';
 import { CommonModule } from '@angular/common';
-import { async, fromEvent, map } from 'rxjs';
 import { CardTableComponent } from '../card-table/card-table.component';
-
 
 @Component({
   selector: 'app-user-management',
@@ -17,10 +13,9 @@ import { CardTableComponent } from '../card-table/card-table.component';
   styleUrl: './user-management.component.scss',
 })
 export class UserManagementComponent implements OnInit {
-  public users: any[] = [];
-  public users1: any[] = [];
-  public displayedUsers: User[] = [];
-  public selectedUsers: User[] = [];
+  public users: UserData[] = [];
+  public page: Page | undefined = { total: 0, current: 0, size: 0 };
+  public selectedUsers: UserData[] = [];
   public showFiltr: boolean = false;
   public useFilter: boolean = false;
   public isLoading: boolean = false;
@@ -28,16 +23,79 @@ export class UserManagementComponent implements OnInit {
   public errorMessage: string | null = null;
   public inputWidth: string = "266px";
   public inputHigth: string = "44px";
-  public isMobile : boolean = false;
+  public isMobile: boolean = false;
+  private readonly STORAGE_KEY = 'user_management_state';
 
-  constructor(private mockApiService: MockApiService, private WindowSizeService: WindowSizeService, private ApiService: ApiService) {}
+  constructor(private WindowSizeService: WindowSizeService, private ApiService: ApiService) {}
 
   ngOnInit(): void {
-    this.loadUsers();
     this.ResizeScreen();
-    this.loadUsers1()
+    this.loadUsers();
+    this.loadPage();
+    this.loadStateFromLocalStorage();
   }
 
+  // Сохранение состояния в локальное хранилище
+  private saveStateToLocalStorage(): void {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
+  }
+
+  // Загрузка состояния из локального хранилища
+  private loadStateFromLocalStorage(): void {
+    const savedState = localStorage.getItem(this.STORAGE_KEY);
+    if (savedState) {
+      try {
+        const parsedState = JSON.parse(savedState);
+        // Обновляем состояние пользователей
+        this.users = this.users.map(user => {
+          const savedUser = parsedState.find((u: UserData) => u.id === user.id);
+          return savedUser ? { ...user, isActive: savedUser.isActive } : user;
+        });
+      } catch (e) {
+        console.error('Не удалось загрузить сохраненное состояние', e);
+      }
+    }
+  }
+
+  // Блокировка пользователей
+  blockUsers(): void {
+    if (this.selectedUsers.length === 0) return;
+    
+    this.selectedUsers.forEach(user => {
+      user.isActive = "INACTIVE";
+      // Здесь можно добавить вызов API для реального блокирования
+    });
+    
+    // Обновляем основной список
+    this.users = this.users.map(user => {
+      const selectedUser = this.selectedUsers.find(u => u.id === user.id);
+      return selectedUser ? { ...user, isActive: "INACTIVE" } : user;
+    });
+    
+    this.saveStateToLocalStorage();
+    // this.selectedUsers = []; // Очищаем выбранных пользователей
+  }
+
+  // Разблокировка пользователей
+  unblockUsers(): void {
+    if (this.selectedUsers.length === 0) return;
+    
+    this.selectedUsers.forEach(user => {
+      user.isActive = "ACTIVE";
+      // Здесь можно добавить вызов API для реального разблокирования
+    });
+    
+    // Обновляем основной список
+    this.users = this.users.map(user => {
+      const selectedUser = this.selectedUsers.find(u => u.id === user.id);
+      return selectedUser ? { ...user, isActive: "ACTIVE" } : user;
+    });
+    
+    this.saveStateToLocalStorage();
+    // this.selectedUsers = []; // Очищаем выбранных пользователей
+  }
+
+  // Остальные методы остаются без изменений
   ResizeScreen(): void {
     this.WindowSizeService.onResize().subscribe(width => {
       if(width >= 1600){
@@ -65,51 +123,32 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  loadUsers(): void {
-    this.isLoading = true;
-    this.errorMessage = null;
-
-    try {
-      this.users = this.mockApiService.getUsers();
-      this.displayedUsers = [...this.users];
-      this.isLoading = false;
-    } catch (error) {
-      this.isLoading = false;
-      this.errorMessage = 'Ошибка при загрузке пользователей';
-      console.error('Ошибка при получении данных:', error);
-    }
+  onFilteredUsers(users: UserData[]) {
+    this.users = users;
   }
 
-  toggleUserStatus(userId: number, userState: boolean): void {
-    this.mockApiService.toggleUserStatus(userId, userState);
-    this.loadUsers();
-  }
-
-  onFilteredUsers(users: User[]) {
-    this.displayedUsers = users;
-  }
-
-  onSelectedUsers(users: User[]) {
+  onSelectedUsers(users: UserData[]) {
     this.selectedUsers = users;
     console.log(this.selectedUsers)
   }
   
-  blockUsers() : void {
-    this.selectedUsers.forEach((user) => {
-      this.mockApiService.toggleUserStatus(user.id, false);
-    })
+  async loadPage() {
+    try {
+      const page = await this.ApiService.getPage().toPromise();
+      this.page = page || undefined;
+      console.log(this.page);
+    } catch (error) {
+      console.error('Ошибка при получении данных:', error);
+    }
   }
 
-  unblockUsers() : void {
-    this.selectedUsers.forEach((user) => {
-      this.mockApiService.toggleUserStatus(user.id, true);
-    })
-  }
-  async loadUsers1() {
+  async loadUsers() {
     try {
       const users = await this.ApiService.getUsers().toPromise();
-      this.users1 = users || [];
-      console.log(this.users1);
+      this.users = users || [];
+      // После загрузки пользователей загружаем сохраненное состояние
+      this.loadStateFromLocalStorage();
+      console.log(this.users);
     } catch (error) {
       console.error('Ошибка при получении данных:', error);
     }

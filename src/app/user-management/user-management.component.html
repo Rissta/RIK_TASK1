@@ -46,14 +46,17 @@
   ></app-filter>
   <app-line-table
     *ngIf="!changeTable"
-    [records]="displayedUsers"
-    [totalRecords]="displayedUsers.length"
+    [records]="users"
+    [totalRecords]="users.length"
     (selectionChange)="onSelectedUsers($event)" 
+    [totalRecords]="page?.total || 0"
+    [pageSize]="page?.size || 0"
+    [currentPage]="page?.current || 0"
   ></app-line-table>
   <app-card-table
     *ngIf="changeTable"
-    [records]="displayedUsers"
-    [totalRecords]="displayedUsers.length"
+    [records]="users"
+    [totalRecords]="users.length"
     (selectionChange)="onSelectedUsers($event)" 
   ></app-card-table>
 </section>

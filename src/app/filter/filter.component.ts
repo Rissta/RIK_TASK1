@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TagInputComponent } from '../tag-input/tag-input.component';
 import { DateInputComponent } from "../date-input/date-input.component";
 import { CustomSelectComponent } from '../custom-select/custom-select.component';
-import { User } from '../services/mock-api.service';
+import { UserData } from '../services/api.service';
 
 @Component({
   selector: 'app-filter',
@@ -11,9 +11,9 @@ import { User } from '../services/mock-api.service';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
-  @Output() filteredUsers = new EventEmitter<User[]>();
+  @Output() filteredUsers = new EventEmitter<UserData[]>();
   public login: string = '';
-  @Input() users: User[] = [];
+  @Input() users: UserData[] = [];
   public mail: string = '';
   public errorMail: boolean = false;
   public phoneNumber: string = '7';
@@ -44,6 +44,7 @@ export class FilterComponent {
       this.phoneNumber = this.phoneNumber.substring(0, 10);
     this.formattedPhone = this.formatPhoneNumber(this.phoneNumber);
   }
+
   private formatPhoneNumber(value: string): string {
     if (!value) return '+7';
     let formattedValue = '+7';
@@ -84,6 +85,13 @@ export class FilterComponent {
     this.dateOfChange = newText;
   }
 
+  public formatDate(date: Date): string {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  }
+
   onDateOfCreationnChanged(newText: string): void {
     this.dateOfCreation = newText;
   }
@@ -111,7 +119,7 @@ export class FilterComponent {
 
   
 
-  setUsers(users: User[]): void {
+  setUsers(users: UserData[]): void {
     this.users = users;
     this.applyFilters();
   }
@@ -136,12 +144,12 @@ export class FilterComponent {
     }
     if (this.dateOfChange && !this.ErrorDateOfChange) {
       filtered = filtered.filter(user => 
-        user.updatedAt === this.dateOfChange
+        this.formatDate(user.updatedAt) === this.dateOfChange
       );
     }
     if (this.dateOfCreation && !this.ErrorDateOfCreation) {
       filtered = filtered.filter(user => 
-        user.createdAt === this.dateOfCreation
+        this.formatDate(user.createdAt) === this.dateOfCreation
       );
     }
     if (this.status !== undefined) {

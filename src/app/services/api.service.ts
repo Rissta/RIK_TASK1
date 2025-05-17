@@ -3,18 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export interface User {
+export interface UserData {
   id: number;
   login: string;
   email: string;
   phone: string;
-  role: string;
-  updatedAt: string;
-  createdAt: string;
-  isActive: boolean;
+  role: boolean;
+  updatedAt: Date;
+  createdAt: Date;
+  isActive: string;
   hasDigitalSignature: boolean;
   selected?: boolean;
 }
+
+export interface Page {
+  total: number;
+  current: number;
+  size: number;
+};
 
 interface ApiResponse {
   page: {
@@ -43,35 +49,58 @@ interface ApiResponse {
 })
 export class ApiService {
   private apiUrl = 'http://test.rikmasters.ru/api/angular-testcase-list/';
-  private users : User[] = [];
+  
   constructor(private http: HttpClient) { }
 
-  private formatDate(date: Date): string {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}.${month}.${year}`;
-  }
-
-  getUsers(): Observable<User[]> {
+  getUsers(): Observable<UserData[]> {
     return this.http.get<ApiResponse>(this.apiUrl).pipe(
-      map(response  => {
-        this.users = response.users.map(user => {
-          const userData = response.data.find(d => d.user_id === user.id);
+      map(response => {
+
+        const usersMap = new Map<number, ApiResponse['users'][0]>();
+        response.users.forEach(user => {
+          usersMap.set(user.id, user);
+        });
+
+        return response.data.map(dataItem => {
+          const user = usersMap.get(dataItem.user_id);
+          if (!user) {
+            return {
+              id: dataItem.user_id,
+              login: `unknown_${dataItem.user_id}`,
+              email: '',
+              phone: '',
+              role: dataItem.is_admin,
+              updatedAt: new Date(),
+              createdAt: new Date(),
+              isActive: dataItem.status,
+              hasDigitalSignature: dataItem.is_ecp
+            };
+          }
+
           return {
             id: user.id,
             login: user.name,
             email: user.email,
             phone: user.phone.toString(),
-            role: userData?.is_admin ? 'admin' : 'user',
-            updatedAt: this.formatDate(new Date(user.update_at * 1000)),
-            createdAt: this.formatDate(new Date(user.create_at * 1000)),
-            isActive: userData?.status === 'ACTIVE',
-            hasDigitalSignature: userData?.is_ecp || false
+            role: dataItem.is_admin,
+            updatedAt: new Date(user.update_at * 1000),
+            createdAt: new Date(user.create_at * 1000),
+            isActive: dataItem.status,
+            hasDigitalSignature: dataItem.is_ecp
           };
         });
-        return this.users;
       })
     );
+  }
+  getPage() : Observable<Page> {
+    return this.http.get<ApiResponse>(this.apiUrl).pipe(
+      map(response => {
+        return {
+          total: response.page.total,
+          current: response.page.current,
+          size: response.page.size
+        }
+      })
+    )
   }
 }

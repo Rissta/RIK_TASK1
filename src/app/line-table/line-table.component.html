@@ -18,15 +18,15 @@
         Количество выбранных записей: {{selectedCount}}
       </div>
     </div>
-    <div class="pagination-controls">
+    <!-- <div class="pagination-controls">
       <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
       <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
       
-      <!-- <span class="page-info">{{currentPage}} из {{totalPages}}</span> -->
+      <span class="page-info">{{currentPage}} из {{totalPages}}</span>
       
       <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
       <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
-    </div>
+    </div> -->
   </div>
 
   <table class="user-table">
@@ -67,13 +67,13 @@
           </div>
         </td>
         <td>{{record.email}}</td>
-        <td>{{record.phone}}</td>
-        <td>{{record.role}}</td>
-        <td>{{record.updatedAt}}</td>
-        <td>{{record.createdAt}}</td>
+        <td>{{formatPhoneNumber(record.phone)}}</td>
+        <td>{{record.role ? 'Администратор' : 'Пользователь'}}</td>
+        <td>{{formatDate(record.updatedAt)}}</td>
+        <td>{{formatDate(record.createdAt)}}</td>
         <td>
-          <p *ngIf="record.isActive" style="color: #25B553; margin: 0px;">Активен</p>
-          <p *ngIf="!record.isActive" style="color: #FF001F;  margin: 0px;">Заблокирован</p>
+          <p *ngIf="record.isActive === 'ACTIVE'" style="color: #25B553; margin: 0px;">Активен</p>
+          <p *ngIf="record.isActive !== 'ACTIVE'" style="color: #FF001F;  margin: 0px;">Заблокирован</p>
         </td>
         <td>
           <img *ngIf="record.hasDigitalSignature" src="assets/icons/green-check-mark.svg"/>
@@ -103,14 +103,11 @@
           <p>Количество выбранных записей: {{selectedCount}}</p>
         </div>
       </div>
-      <div class="pagination-controls">
+      <!-- <div class="pagination-controls">
         <button (click)="goToFirstPage()" [disabled]="currentPage === 1"><img src="assets/icons/first-page.svg"/></button>
-        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>
-        
-        <!-- <span class="page-info">{{currentPage}} из {{totalPages}}</span> -->
-        
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"><img src="assets/icons/prev-page.svg"/></button>        
         <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/next-page.svg"/></button>
         <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"><img src="assets/icons/last-page.svg"/></button>
-      </div>
+      </div> -->
     </div>
     
