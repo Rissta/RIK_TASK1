@@ -1,0 +1,33 @@
+<nav *ngIf="show">
+    <div class="controls">
+      <img src="assets/icons/settings-accaunt.svg">
+      <span>Иванов И.И</span>
+    </div>
+    <div class="controls">
+      <img src="assets/icons/administaraion.svg">
+      <span>Администрирование</span>
+    </div>
+    <div class="controls-dropdown" (click)="toggleDropdown()">
+      <span>
+        Иванов И.И
+        <span>Банк ВТБ(ПАО)</span>
+      </span>
+      <div class="dropdown-arrow" [class.rotated]="isDropdownOpen">
+        <img src="assets/icons/triangle-inverted.svg" />
+      </div>
+    </div>
+    <div *ngIf="isDropdownOpen">
+      <div class="dropdown">
+        <img src="assets/icons/case-filled.svg">
+        <span>Управление</span>
+      </div>
+      <div class="dropdown">
+        <img src="assets/icons/people.svg">
+        <span>Субагенты</span>
+      </div>
+    </div>
+    <footer class="version">
+      v1.01
+    </footer>
+  </nav>
+  

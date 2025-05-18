@@ -25,6 +25,7 @@ export class UserManagementComponent implements OnInit {
   public inputHigth: string = "44px";
   public isMobile: boolean = false;
   private readonly STORAGE_KEY = 'user_management_state';
+  public noShow: boolean = false;
 
   constructor(private WindowSizeService: WindowSizeService, private ApiService: ApiService) {}
 
@@ -120,6 +121,7 @@ export class UserManagementComponent implements OnInit {
       }
       this.changeTable = width < 1024;
       this.isMobile = width < 786
+      this.noShow = width < 320;
     });
   }
 

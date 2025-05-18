@@ -11,6 +11,7 @@ import { WindowSizeService } from '../services/window-size.service';
 
 export class HeaderComponent implements OnInit{
   isTabletSize : boolean = false;
+  noShow : boolean = true;
   isDropdownOpen = false;
   constructor(private WindowSizeService: WindowSizeService) {}
 
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit{
     this.WindowSizeService.onResize().subscribe(width => 
       {
       this.isTabletSize = width <= 1440;
+      this.noShow = width >= 320
     });
   }
 
