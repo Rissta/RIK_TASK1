@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from './../../environments/environment.prod';
+
 
 export interface UserData {
   id: number;
@@ -48,7 +50,7 @@ interface ApiResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://test.rikmasters.ru/api/angular-testcase-list/';
+  private apiUrl = environment.apiUrl;
   
   constructor(private http: HttpClient) { }
 

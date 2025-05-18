@@ -5,7 +5,6 @@ import { FilterComponent } from '../filter/filter.component';
 import { LineTableComponent } from '../line-table/line-table.component';
 import { CommonModule } from '@angular/common';
 import { CardTableComponent } from '../card-table/card-table.component';
-
 @Component({
   selector: 'app-user-management',
   imports: [FilterComponent, LineTableComponent, CardTableComponent, CommonModule],
@@ -37,18 +36,15 @@ export class UserManagementComponent implements OnInit {
     this.loadStateFromLocalStorage();
   }
 
-  // Сохранение состояния в локальное хранилище
   private saveStateToLocalStorage(): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
   }
 
-  // Загрузка состояния из локального хранилища
   private loadStateFromLocalStorage(): void {
     const savedState = localStorage.getItem(this.STORAGE_KEY);
     if (savedState) {
       try {
         const parsedState = JSON.parse(savedState);
-        // Обновляем состояние пользователей
         this.users = this.users.map(user => {
           const savedUser = parsedState.find((u: UserData) => u.id === user.id);
           return savedUser ? { ...user, isActive: savedUser.isActive } : user;
@@ -59,45 +55,36 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
-  // Блокировка пользователей
   blockUsers(): void {
     if (this.selectedUsers.length === 0) return;
     
     this.selectedUsers.forEach(user => {
       user.isActive = "INACTIVE";
-      // Здесь можно добавить вызов API для реального блокирования
     });
     
-    // Обновляем основной список
     this.users = this.users.map(user => {
       const selectedUser = this.selectedUsers.find(u => u.id === user.id);
       return selectedUser ? { ...user, isActive: "INACTIVE" } : user;
     });
     
     this.saveStateToLocalStorage();
-    // this.selectedUsers = []; // Очищаем выбранных пользователей
   }
 
-  // Разблокировка пользователей
   unblockUsers(): void {
     if (this.selectedUsers.length === 0) return;
     
     this.selectedUsers.forEach(user => {
       user.isActive = "ACTIVE";
-      // Здесь можно добавить вызов API для реального разблокирования
     });
     
-    // Обновляем основной список
     this.users = this.users.map(user => {
       const selectedUser = this.selectedUsers.find(u => u.id === user.id);
       return selectedUser ? { ...user, isActive: "ACTIVE" } : user;
     });
     
     this.saveStateToLocalStorage();
-    // this.selectedUsers = []; // Очищаем выбранных пользователей
   }
 
-  // Остальные методы остаются без изменений
   ResizeScreen(): void {
     this.WindowSizeService.onResize().subscribe(width => {
       if(width >= 1600){
