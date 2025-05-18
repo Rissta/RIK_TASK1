@@ -39,7 +39,7 @@
   </div>
   <app-filter
     *ngIf="showFiltr"
-    [users]="users"
+    [users]="filterUsers"
     [inputWidth]="inputWidth"
     [inputHigth]="inputHigth"
     (filteredUsers)="onFilteredUsers($event)"

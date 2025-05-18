@@ -14,6 +14,7 @@ import { CardTableComponent } from '../card-table/card-table.component';
 })
 export class UserManagementComponent implements OnInit {
   public users: UserData[] = [];
+  public filterUsers: UserData[] = [];
   public page: Page | undefined = { total: 0, current: 0, size: 0 };
   public selectedUsers: UserData[] = [];
   public showFiltr: boolean = false;
@@ -148,6 +149,7 @@ export class UserManagementComponent implements OnInit {
     try {
       const users = await this.ApiService.getUsers().toPromise();
       this.users = users || [];
+      this.filterUsers = users || [];
       // После загрузки пользователей загружаем сохраненное состояние
       this.loadStateFromLocalStorage();
       console.log(this.users);

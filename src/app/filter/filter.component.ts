@@ -164,6 +164,8 @@ export class FilterComponent {
       );
     }
     this.filteredUsers.emit(filtered);
+    console.log(this.users)
+
   }
   cancelFilters() : void {
     this.filteredUsers.emit(this.users);
