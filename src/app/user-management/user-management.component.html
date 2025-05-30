@@ -57,5 +57,7 @@
     [records]="users"
     [totalRecords]="users.length"
     (selectionChange)="onSelectedUsers($event)" 
+    [pageSize]="page?.size || 0"
+    [currentPage]="page?.current || 0"
   ></app-card-table>
 </section>
